@@ -80,11 +80,11 @@ export function CardDay() {
               <h2 className="font-serif text-3xl font-medium text-bark sm:text-4xl">
                 {card.name}
               </h2>
-              <p className="mt-2 text-[0.7rem] uppercase tracking-[0.28em] text-sage-600">
-                {card.keywords.join(" · ")}
-              </p>
               <p className="mt-4 max-w-md text-base leading-relaxed text-bark-soft">
                 {card.meaning}
+              </p>
+              <p className="mt-3 max-w-md text-base leading-relaxed text-bark-soft">
+                {card.atmosphere}
               </p>
               <p className="mt-3 max-w-md font-serif text-lg italic leading-relaxed text-sage-700">
                 Совет дня: {card.advice}
