@@ -1,3 +1,4 @@
+import { asset } from "@/lib/asset";
 import { vkMessages } from "@/data/deck";
 import Image from "next/image";
 
@@ -7,7 +8,7 @@ export function DeepInvite() {
       {/* Линейный фон: переплетённые руки и нежный цветок */}
       <div aria-hidden className="absolute inset-0">
         <Image
-          src="/images/hands-flower-line.webp"
+          src={asset("/images/hands-flower-line.webp")}
           alt=""
           fill
           sizes="100vw"
@@ -21,8 +22,7 @@ export function DeepInvite() {
           Личная встреча
         </p>
         <h2 className="mt-6 font-serif text-3xl font-medium leading-snug sm:text-5xl sm:leading-tight">
-          Приглашаю вас на личную бережную диагностику вашей жизни и
-          состояния
+          Приглашаю вас на личную бережную диагностику вашей жизни и состояния
         </h2>
         <div className="mt-7 space-y-4 text-base leading-relaxed text-cream/85 sm:text-lg">
           <p>
@@ -32,10 +32,10 @@ export function DeepInvite() {
           </p>
           <p>
             На персональной сессии мы бережно разберем именно ваш запрос. Без
-            мистики и готовых шаблонов — только глубокий психологический
-            анализ, поиск внутренних ресурсов и составление пошаговой карты
-            ваших действий. Это безопасное, поддерживающее пространство,
-            созданное специально для вас.
+            мистики и готовых шаблонов — только глубокий психологический анализ,
+            поиск внутренних ресурсов и составление пошаговой карты ваших
+            действий. Это безопасное, поддерживающее пространство, созданное
+            специально для вас.
           </p>
           <p className="text-cream">
             • Формат: Онлайн-сессия (60 минут) + индивидуальный PDF-гайд по

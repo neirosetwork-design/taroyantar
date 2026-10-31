@@ -15,8 +15,8 @@ export function ContactForm() {
             Поделиться с Натальей
           </h2>
           <p className="mx-auto mt-4 max-w-sm text-center text-sm leading-relaxed text-bark-soft">
-            Напишите пару строк о себе — я вернусь с разбором ситуации в
-            течение 24 часов.
+            Напишите пару строк о себе — я вернусь с разбором ситуации в течение
+            24 часов.
           </p>
 
           <ol className="mx-auto mt-8 max-w-sm space-y-3.5">
@@ -40,6 +40,10 @@ export function ContactForm() {
           >
             Напишите мне
           </a>
+
+          <p className="mt-4 text-center text-xs leading-relaxed text-bark-soft/80">
+            Бесплатный расклад доступен для новых клиентов при первом обращении.
+          </p>
         </div>
       </div>
     </section>

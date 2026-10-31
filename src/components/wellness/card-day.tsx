@@ -31,8 +31,8 @@ export function CardDay() {
         </h1>
 
         <p className="mt-6 max-w-md text-base leading-relaxed text-bark-soft sm:text-lg">
-          Замедлитесь, мысленно задайте свой вопрос, сделайте глубокий вдох
-          и вытяните метафорическую карту…
+          Замедлитесь, мысленно задайте свой вопрос, сделайте глубокий вдох и
+          вытяните метафорическую карту
         </p>
 
         {/* Карта: плавный переворот, мягкая рассеянная тень */}
@@ -100,12 +100,6 @@ export function CardDay() {
             </button>
           )}
         </div>
-
-        {!card ? (
-          <p className="mt-2 text-xs leading-relaxed text-bark-soft/70">
-            Одна карта на день — она уже знает ваш вопрос
-          </p>
-        ) : null}
       </div>
     </section>
   );
