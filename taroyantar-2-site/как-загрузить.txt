@@ -1,0 +1,23 @@
+КАК ЗАГРУЗИТЬ САЙТ НА GITHUB
+============================
+
+Это ЧАСТЬ 2 из 2 — сам сайт (страницы, стили, шрифты).
+
+1. Распакуйте архив. Внутри будет папка docs.
+2. Откройте репозиторий:
+   https://github.com/neirosetwork-design/taroyantar
+   Важно: откройте именно корень репозитория — там, где видны папки
+   src, public, package.json. Не заходите внутрь папки docs.
+3. Нажмите "Add file" → "Upload files".
+4. Перетащите папку docs из этого архива в окно загрузки.
+5. Дождитесь загрузки и нажмите "Commit changes".
+
+После этого:
+6. Зайдите в "Settings" → "Pages".
+7. В разделе "Build and deployment":
+   Source: "Deploy from a branch"
+   Branch: "main", папка "/docs"
+8. Нажмите "Save" и подождите 1-2 минуты.
+
+Сайт будет доступен по адресу:
+https://neirosetwork-design.github.io/taroyantar/
