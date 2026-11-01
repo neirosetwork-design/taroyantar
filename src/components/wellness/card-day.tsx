@@ -110,20 +110,20 @@ export function CardDay() {
                 Совет дня: {card.advice}
               </p>
             </div>
-          ) : (
-            <>
-              <button
-                type="button"
-                onClick={draw}
-                className="cursor-pointer rounded-full bg-sage-500 px-10 py-4 text-sm font-medium uppercase tracking-[0.18em] text-milk shadow-card transition-all duration-300 hover:bg-sage-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-600/70 focus-visible:ring-offset-2 focus-visible:ring-offset-milk active:scale-[0.99] motion-reduce:transition-none"
-              >
-                Вытянуть карту
-              </button>
-              <p className="mt-3 text-xs leading-relaxed text-bark-soft/70">
-                Один вопрос - одна карта.
-              </p>
-            </>
-          )}
+          ) : null}
+
+          <div className={card ? "mt-8" : undefined}>
+            <button
+              type="button"
+              onClick={draw}
+              className="cursor-pointer rounded-full bg-sage-500 px-10 py-4 text-sm font-medium uppercase tracking-[0.18em] text-milk shadow-card transition-all duration-300 hover:bg-sage-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-600/70 focus-visible:ring-offset-2 focus-visible:ring-offset-milk active:scale-[0.99] motion-reduce:transition-none"
+            >
+              Вытянуть карту
+            </button>
+            <p className="mt-3 text-xs leading-relaxed text-bark-soft/70">
+              Один вопрос - одна карта.
+            </p>
+          </div>
         </div>
       </div>
     </section>
