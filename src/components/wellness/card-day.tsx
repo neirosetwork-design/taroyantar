@@ -1,6 +1,6 @@
 "use client";
 
-import { deck, dayIndex, pickCard, type TarotCard } from "@/data/deck";
+import { deck, type TarotCard } from "@/data/deck";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -10,7 +10,27 @@ export function CardDay() {
   const [card, setCard] = useState<TarotCard | null>(null);
 
   function draw() {
-    setCard(pickCard(deck.cards, dayIndex()));
+    let last: string | null = null;
+    try {
+      last = window.localStorage.getItem("tarot:last-card");
+    } catch {
+      // localStorage может быть недоступен в приватном режиме
+    }
+
+    // Каждый раз выбираем случайную карту и не повторяем предыдущую.
+    const pool = last
+      ? deck.cards.filter((item) => item.slug !== last)
+      : deck.cards;
+    const source = pool.length > 0 ? pool : deck.cards;
+    const next = source[Math.floor(Math.random() * source.length)];
+
+    try {
+      window.localStorage.setItem("tarot:last-card", next.slug);
+    } catch {
+      // если хранилище недоступно, просто показываем случайную карту
+    }
+
+    setCard(next);
   }
 
   return (
@@ -91,13 +111,18 @@ export function CardDay() {
               </p>
             </div>
           ) : (
-            <button
-              type="button"
-              onClick={draw}
-              className="cursor-pointer rounded-full bg-sage-500 px-10 py-4 text-sm font-medium uppercase tracking-[0.18em] text-milk shadow-card transition-all duration-300 hover:bg-sage-600 hover:shadow-card-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-600/70 focus-visible:ring-offset-2 focus-visible:ring-offset-milk active:scale-[0.99] motion-reduce:transition-none"
-            >
-              Вытянуть карту
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={draw}
+                className="cursor-pointer rounded-full bg-sage-500 px-10 py-4 text-sm font-medium uppercase tracking-[0.18em] text-milk shadow-card transition-all duration-300 hover:bg-sage-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage-600/70 focus-visible:ring-offset-2 focus-visible:ring-offset-milk active:scale-[0.99] motion-reduce:transition-none"
+              >
+                Вытянуть карту
+              </button>
+              <p className="mt-3 text-xs leading-relaxed text-bark-soft/70">
+                Один вопрос - одна карта.
+              </p>
+            </>
           )}
         </div>
       </div>
