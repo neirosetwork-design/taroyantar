@@ -4,25 +4,47 @@ import { deck, type TarotCard } from "@/data/deck";
 import Image from "next/image";
 import { useState } from "react";
 
+function shuffle<T>(items: T[]): T[] {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
 // Карта выбирается только по клику на клиенте, поэтому серверный HTML
 // всегда показывает рубашку — рассинхрона гидратации нет.
 export function CardDay() {
   const [card, setCard] = useState<TarotCard | null>(null);
+  const [queue, setQueue] = useState<TarotCard[]>([]);
 
   function draw() {
-    let last: string | null = null;
-    try {
-      last = window.localStorage.getItem("tarot:last-card");
-    } catch {
-      // localStorage может быть недоступен в приватном режиме
+    // Колода перемешивается заново только когда закончился текущий круг:
+    // так все 78 карт выпадают по одному разу без повторов.
+    let nextQueue = queue.length > 0 ? [...queue] : shuffle(deck.cards);
+
+    if (queue.length === 0) {
+      let last: string | null = null;
+      try {
+        last = window.localStorage.getItem("tarot:last-card");
+      } catch {
+        // localStorage может быть недоступен в приватном режиме
+      }
+      const previous = card?.slug ?? last;
+      if (previous) {
+        const swapIndex = nextQueue.findIndex((item) => item.slug !== previous);
+        if (swapIndex > 0) {
+          [nextQueue[0], nextQueue[swapIndex]] = [
+            nextQueue[swapIndex],
+            nextQueue[0],
+          ];
+        }
+      }
     }
 
-    // Каждый раз выбираем случайную карту и не повторяем предыдущую.
-    const pool = last
-      ? deck.cards.filter((item) => item.slug !== last)
-      : deck.cards;
-    const source = pool.length > 0 ? pool : deck.cards;
-    const next = source[Math.floor(Math.random() * source.length)];
+    const next = nextQueue[0];
+    if (!next) return;
 
     try {
       window.localStorage.setItem("tarot:last-card", next.slug);
@@ -30,6 +52,7 @@ export function CardDay() {
       // если хранилище недоступно, просто показываем случайную карту
     }
 
+    setQueue(nextQueue.slice(1));
     setCard(next);
   }
 
