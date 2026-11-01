@@ -2,7 +2,7 @@
 
 import { deck, type TarotCard } from "@/data/deck";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function shuffle<T>(items: T[]): T[] {
   const result = [...items];
@@ -18,6 +18,13 @@ function shuffle<T>(items: T[]): T[] {
 export function CardDay() {
   const [card, setCard] = useState<TarotCard | null>(null);
   const [queue, setQueue] = useState<TarotCard[]>([]);
+
+  // Через 30 секунд карта переворачивается обратно и текст скрывается.
+  useEffect(() => {
+    if (!card) return;
+    const timer = window.setTimeout(() => setCard(null), 30_000);
+    return () => window.clearTimeout(timer);
+  }, [card]);
 
   function draw() {
     // Колода перемешивается заново только когда закончился текущий круг:
